@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Shop</title>
+    <title>Mybrary</title>
 </head>
 <body>
-    Before
     <br>
+    <%- include('../partials/header.ejs') %>
+    <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+        <div class="error"><%= errorMessage %></div>
+    <% } %>
     <%- body %>
     <br>
     After
