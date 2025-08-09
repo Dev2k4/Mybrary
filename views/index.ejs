@@ -1,1 +1,11 @@
-Middle
+<h2>Recently Added</h2>
+<div style="display: flex; text-align: center;">
+   <% books.forEach(book =>{ %>
+    <div style="border: rgb(199, 70, 70); display: block; margin: 4px;">
+    <img height="150" width="80" src= "<%= book.coverImagePath%>"></img>
+    <div>
+        <%= book.title%>
+    </div>
+    </div>
+<%})  %> 
+</div>

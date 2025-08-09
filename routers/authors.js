@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Author = require('../models/author');
-const author = require('../models/author');
+
 const { redirect } = require('react-router-dom');
 // Route Authors
 router.get('/', async (req, res) => {
