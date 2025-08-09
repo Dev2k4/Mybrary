@@ -20,7 +20,6 @@ app.use(expresslayouts);
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
 
-
 const mongoose = require('mongoose');
 const { callback } = require('chart.js/helpers');
 mongoose.connect(process.env.MONGO_URI)
@@ -37,8 +36,8 @@ app.use('/books', bookRouter);
 
 // Start the server
 app.listen(process.env.PORT || 3000, () => {
-  console.log('Server is running on port 3000');
-  console.log("MONGO_URI =", process.env.MONGO_URI);
+  console.log('Server is running on', process.env.PORT);
+
 
 });
 

@@ -3,18 +3,18 @@ const router = express.Router();
 const Book = require('../models/book');
 const Author = require('../models/author');
 
-const multer = require('multer');
+// const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const uploadPath = path.join('public/', Book.coverImageBasePath);
 const imageMimeTypes = ['image/jpeg', 'image/png', 'image/gif'];
-const upload = multer({
-  dest: uploadPath,
-  fileFilter: (req, file, callback) =>{
-    callback(null, imageMimeTypes.includes(file.mimetype));
-  }
+// const upload = multer({
+//   dest: uploadPath,
+//   fileFilter: (req, file, callback) =>{
+//     callback(null, imageMimeTypes.includes(file.mimetype));
+//   }
+// })
 
-})
 // Route All Books
 router.get('/', async (req, res) => {
     
@@ -40,7 +40,8 @@ router.get('/', async (req, res) => {
         })
     }catch(err) 
     {
-        console.error("Error fetching books:", err);
+        console.error("Message:", err.message);
+        console.error("Errors:", err.errors);
         res.redirect('/')
     }
 });
@@ -50,16 +51,18 @@ router.get('/new', async (req, res) => {
 }); 
 // Route Create Books
 
-router.post('/', upload.single('cover'), async (req, res) => {
-    const filename = req.file != null ? req.file.filename : null; 
+router.post('/', async (req, res) => {
+    console.log(req.body.cover)
+    // const filename = req.file != null ? req.file.filename : null; 
     const book = new Book({
         title: req.body.title,
         author: req.body.author,
         description: req.body.description,
         publishDate: new Date(req.body.publishDate),
-        coverImageName: filename,
+        // coverImageName: filename,
         pageCount: req.body.pageCount
 });
+    saveCover(book, req.body.cover);
     try {
         const newBook = await book.save();
         // res.redirect(`books/${newBook.id}`);
@@ -68,7 +71,7 @@ router.post('/', upload.single('cover'), async (req, res) => {
        console.error("Message:", err.message);
         console.error("Errors:", err.errors);
         if(book.coverImageName != null) {
-            removeBookCover(book.coverImageName);
+            // removeBookCover(book.coverImageName);
         }
         renderNewPage(res, book, true);
     }
@@ -83,14 +86,30 @@ async function renderNewPage(res, book, hashError = false) {
         }
         if(hashError) params.errorMessage = 'Error creating Book';
         res.render('books/new', params)
-    }catch{
+    }catch(err){
+        console.error("Message:", err.message);
+        console.error("Errors:", err.errors);
         res.redirect('/books');
     }
 }
-function removeBookCover(fileName) {
-    fs.unlink(path.join(uploadPath, fileName), err =>{
-        if(err) console.error(err);
+// function removeBookCover(fileName) {
+//     fs.unlink(path.join(uploadPath, fileName), err =>{
+//         if(err) console.error(err);
+//     }
+// )}
+// lưu bìa 
+function saveCover(book, coverEncoded) {
+    if (!coverEncoded) return;
+    let cover;
+    try {
+        cover = JSON.parse(coverEncoded);
+    } catch (err) {
+        console.error("Invalid cover JSON:", coverEncoded);
+        return;
     }
-)}
-
+    if (cover && imageMimeTypes.includes(cover.type)) {
+        book.coverImage = Buffer.from(cover.data, 'base64');
+        book.coverImageType = cover.type;
+    }
+}
 module.exports = router;
