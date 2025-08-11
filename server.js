@@ -6,7 +6,7 @@ const app = express();
 const book = require('./models/book');
 const expresslayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
-
+const overrride = require('method-override');
 // Import routers
 const indexRouter = require('./routers/index');
 const authorRouter = require('./routers/authors');
@@ -19,6 +19,7 @@ app.set('layout', 'layouts/layout');
 app.use(expresslayouts);
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }));
+app.use(overrride('_method'));
 
 const mongoose = require('mongoose');
 const { callback } = require('chart.js/helpers');

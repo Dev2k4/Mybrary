@@ -1,0 +1,17 @@
+
+<h2><%= author.name %></h2>
+<%- include('../partials/deleteForm.ejs', {url:author.id})%>
+<button><a href="/authors/<%= author.id %>/edit">Edit</a></button>
+
+
+<div style="display: block; align-items: center; margin-bottom: 10px;"></div>
+<% if (books.length > 0){%>
+    <h2>Book of author: <%= author.name %></h2>
+    <% books.forEach(book =>{ %>
+            <img src = "<%= book.coverImagePath%>" height="100" width="50"></img>
+            <div style="margin-right: 10px;">
+            <a href="#"><%= book.title%><div>     
+            </div>
+    <%})%>
+<%}%>
+</div>
