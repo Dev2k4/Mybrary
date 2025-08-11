@@ -1,0 +1,13 @@
+<h2><%= book.title%></h2>
+<div style="display: flex; flex-direction: column; align-items: left; margin-bottom: 10px;">
+    <img src="<%= book.coverImagePath %>" height="200" width="100"></img>
+    <a href="/authors/<%= book.author.id %>">Author: <%= book.author.name%><a> 
+    <p>Published: <%= book.publishDate.toLocaleDateString()%></p>
+    <p>Description: <%= book.description %></p>
+    <p>Page Count: <%= book.pageCount %></p>
+    <div display="flex" style="margin-top: 10px;">
+    <a href="/books/<%= book.id %>/edit">Edit</a>
+    <%- include('../partials/deleteForm.ejs', {url: `/books/${book.id}`}) %>
+    <a href="/books">Back to Books</a>
+</div>        
+</div>

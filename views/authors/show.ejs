@@ -1,6 +1,6 @@
 
 <h2><%= author.name %></h2>
-<%- include('../partials/deleteForm.ejs', {url:author.id})%>
+<%- include('../partials/deleteForm.ejs', {url:`/authors/${author.id}`})%>
 <button><a href="/authors/<%= author.id %>/edit">Edit</a></button>
 
 
@@ -10,7 +10,7 @@
     <% books.forEach(book =>{ %>
             <img src = "<%= book.coverImagePath%>" height="100" width="50"></img>
             <div style="margin-right: 10px;">
-            <a href="#"><%= book.title%><div>     
+            <a href="/books/<%= book.id%>"><%= book.title%><div>     
             </div>
     <%})%>
 <%}%>

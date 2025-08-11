@@ -9,7 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
         stylePanelAspectRatio: '150:100',
         imageResizeTargetWidth: 100,
         imageResizeTargetHeight: 150,
-    })
+        stylePanelLayout: 'compact', 
+        stylePanelMaxHeight: '300px', 
+        stylePanelMaxWidth: '400px',
 
+
+    })
     FilePond.parse(document.body);
+
 });
