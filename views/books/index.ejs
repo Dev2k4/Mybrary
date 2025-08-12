@@ -14,16 +14,15 @@
 
 <button type="submit">Search</button>
 </form>
-<div style="display: flex; text-align: center;">
+<div style="display: block; text-align: center;">
 <% books.forEach(book =>{ %>
-    <div style="border: rgb(199, 70, 70); display: block; margin: 10px;">
+    <div style="border: rgb(199, 70, 70); display: flex; margin: 10px;">
     <img height="100" width="50" src= "<%= book.coverImagePath%>"></img>
-    <div>
-        <a href="/books/<%= book.id %>">View</a>
-        <a href="/books/<%= book.id %>/edit">Edit</a>
+    <div class = "btn-row">
+        <a class="btn btn-primary" href="/books/<%= book.id %>">View</a>
+        <a class="btn btn-primary" href="/books/<%= book.id %>/edit">Edit</a>
         <%- include('../partials/deleteForm.ejs', {url: `/books/${book.id}`})%>
     </div>
     </div>
-
 <%})  %>
 </div>

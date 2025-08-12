@@ -4,14 +4,15 @@
     --color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 20%);
     --color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 20%);
     --border-btn-border: black;
-    --color-btn-danger-text: black;
+    --color-btn-danger-text: hsl(var(--color-danger-hue), 100%, 20%);
     --color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%) ;
 }
 .btn{
     border: 1px solid var(--border-btn-border);
     border-radius: .5rem;
-    padding: .5rem 1rem;
-    font-size:  1.2rem;
+    padding: .4rem 0.9rem;
+    font-size:  1rem;
+    font-weight: 100;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     cursor: pointer;
     text-decoration: none;
