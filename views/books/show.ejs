@@ -1,4 +1,4 @@
-<h2><%= book.title%></h2>
+<h2 class="page-header"><%= book.title%></h2>
 <div style="display: flex; flex-direction: column; align-items: left; margin-bottom: 10px;">
     <img src="<%= book.coverImagePath %>" height="200" width="100"></img>
     <a href="/authors/<%= book.author.id %>">Author: <%= book.author.name%><a> 

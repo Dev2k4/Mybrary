@@ -129,7 +129,14 @@ async function renderFormPage(res, book, form, hashError = false) {
             book: book,
             authors: authors
         }
-        if(hashError) params.errorMessage = 'Error editing Book';
+        if(hashError){
+          if(form === 'new') {
+            params.errorMessage = 'Error creating Book';
+          }
+          else if(form === 'edit'){
+            params.errorMessage = 'Error updating Book';
+          } 
+        }
         res.render(`books/${form}`, params)
     }catch(err){
         console.error("Message Edit Book:", err.message);
